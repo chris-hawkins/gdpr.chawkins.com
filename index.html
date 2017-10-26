@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>whiteList</title>
+
+    <style type="text/css">
+        html,body{
+            padding: 0;
+            margin: 0;
+        }
+        table{
+            width:100%;
+            border: 2px solid grey;
+        }
+        table.testTitles{
+            top:94px;
+            left:0px;
+            background-color: #fff;
+        }
+        table.testTable{
+            margin-top: 71px;
+        }
+        table td{
+            padding:20px;
+            max-height: 300px;
+            background: #dcdcdc;
+            vertical-align: top;
+            align-content: center;
+            height: 300px;
+        }
+        table .testHeader td{
+            height: auto;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        img, iframe{
+            width: 200px;
+            height: 200px;
+        }
+        button{
+            align-self: center;
+            margin: 20px;
+        }
+        #changePrefs{
+            width: 100%;
+            margin:0;
+            padding: 0;
+            background-color: #4285f4;
+            color:#fff;
+            font-size: 20px;
+            padding: 10px;
+            top:0px;
+            left:0px;
+        }
+        #clearAllCookies{
+            width: 100%;
+            margin:0;
+            padding: 0;
+            background-color: #4285f4;
+            color:#fff;
+            font-size: 20px;
+            padding: 10px;
+            top:47px;
+            left:0px;
+        }
+        .fixed{
+            position: fixed;
+        }
+
+
+    </style>
+
+</head>
+<body>
+
+<button id="changePrefs" class="fixed">Change Cookie Preferences</button>
+<button id="clearAllCookies" onclick="deleteAllCookies()" class="fixed">Clear All Cookies</button>
+<table class="fixed testTitles">
+    <tr>
+        <th>Image Tests</th>
+        <th>Script Tests</th>
+        <th>iFrame Tests</th>
+    </tr>
+</table>
+<table class="testTable">
+    <tr class="testHeader">
+        <td colspan="3">Test Source Loaded From The Web Server</td>
+    </tr>
+    <tr>
+        <td>
+            <div>Basic Image</div>
+            <img src="images/thisIsATest.jpg" width="409" height="409">
+        </td>
+        <td>
+            <div>Load JavaScript File From Server</div>
+            <div id="jsTest1Message">Test Not Run</div>
+            <script id="jsTest1" type="text/javascript" src="http://ensightentest.nickstark.com/jsTest1.js"></script>
+
+        </td>
+        <td>
+            <div>Load Simple iFrame</div>
+            <iframe src="http://ensightentest.nickstark.com/iframe1.html"></iframe>
+
+        </td>
+    </tr>
+    <tr class="testHeader">
+        <td colspan="3">Test Injection From 3rd Party Sources Using AppendChild</td>
+    </tr>
+    <tr>
+        <td>
+            <div>Load External Image</div>
+            <button id="injectImage">Inject Image</button>
+            <div id="imgTarget">Test Not Run</div>
+        </td>
+        <td>
+            <div>Script</div>
+            <button id="injectScript">Inject Script</button>
+            <div id="appendChildScriptMessage">Test Not Run</div>
+            <div id="scriptTarget"></div>
+        </td>
+        <td>
+            <div>Load ESPN</div>
+            <button id="injectIFrame">Inject iFrame</button>
+            <div id="iFrameTarget">Test Not Run</div>
+        </td>
+    </tr>
+    <tr class="testHeader">
+        <td colspan="3">Block Request Based On Regex Match</td>
+    </tr>
+    <tr>
+        <td>
+            <div>Inject Image With Phone in URL</div>
+            <button id="injectImagePhone">Inject</button>
+            <div id="imgTargetPhone">Test Not Run</div>
+        </td>
+        <td>
+            <div>Inject Image With Encoded SSN in URL</div>
+            <button id="injectImageEncodedSSN">Inject</button>
+            <div id="imgTargetEncodedSSN">Test Not Run</div>
+        </td>
+        <td>
+            <div>Inject Logo With Phone in URL</div>
+            <button id="injectLogoPhone">Inject</button>
+            <div id="imgTargetLogoPhone">Test Not Run</div>
+            <div>Inject Logo With Encoded SSN in URL</div>
+            <button id="injectLogoEncodedSSN">Inject</button>
+            <div id="imgLogoEncodedSSN">Test Not Run</div>
+        </td>
+    </tr>
+
+    <tr class="testHeader">
+        <td colspan="3">Test Changing The Src From Web Server To 3rd Party Source</td>
+    </tr>
+    <tr>
+        <td>
+            <button id="chgImgSrc">Change Image Src</button>
+            <div>
+                <img id="trump" src="images/thisIsATest.jpg" width="409" height="409">
+            </div>
+
+        </td>
+        <td>
+            <button id="chgScriptSrcButton">Change Script Src</button>
+            <script id="changeScriptSourceTag" type="text/javascript" src="http://ensightentest.nickstark.com/changeScriptSrcBefore.js"></script>
+
+        </td>
+        <td>
+            <button id="chgIFrameSrc">Change iFrame Src</button>
+            <div>
+                <!--<iframe src="http://www.espn.com"></iframe>-->
+            </div>
+
+        </td>
+    </tr>
+    <tr class="testHeader">
+        <td colspan="3">Test innerHTML injection</td>
+    </tr>
+    <tr>
+        <td>
+            <button id="injectInnerHTMLImg">Inject Image</button>
+            <div id="innerHTMLImgTarget"></div>
+        </td>
+        <td>
+            <button id="injectInnerHTMLScript">Inject Script</button>
+            <div id="innerHTMLScriptMessage"></div>
+            <div id="innerHTMLScriptTarget"></div>
+        </td>
+        <td>
+            <button id="injectInnerHTMLiFrame">Inject IFrame</button>
+            <div id="innerHTMLiFrameTarget"></div>
+        </td>
+    </tr>
+    <tr class="testHeader">
+        <td colspan="3">Logging Test</td>
+    </tr>
+    <tr>
+        <td colspan="3">
+            <div id="loggingTarget"></div>
+        </td>
+
+    </tr>
+</table>
+
+
+
+
+
+<script type="text/javascript">
+
+    var isIE8OrLower = document.all && !document.addEventListener;
+
+    var changePrefsButton = document.getElementById('changePrefs');
+    var injectImgButton = document.getElementById('injectImage');
+    var injectImgPhoneButton = document.getElementById('injectImagePhone');
+    var injectImgEncodedSSNButton = document.getElementById('injectImageEncodedSSN');
+    var injectLogoPhoneButton = document.getElementById('injectLogoPhone');
+    var injectLogoEncodedSSNButton = document.getElementById('injectLogoEncodedSSN');
+    var injectScriptButton = document.getElementById('injectScript');
+    var injectIFrameButton = document.getElementById('injectIFrame');
+    var chgImgSrcButton = document.getElementById('chgImgSrc');
+    var chgScriptSrcButton = document.getElementById('chgScriptSrcButton');
+
+    var testNativeJSLoad = function(){
+        setTimeout(function () {
+            var target = document.getElementById("jsTest1Message");
+
+            if (typeof(ensJSTest1) !== 'undefined') {
+                target.innerHTML = "JavaScript File Successfully Injected";
+            }
+            else{
+                target.innerHTML = "JavaScript File Injection Failed";
+            }
+
+        }, 1000);
+    };
+
+
+    function deleteAllCookies() {
+        var cookies = document.cookie.split(";");
+
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i];
+            var eqPos = cookie.indexOf("=");
+            var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+            document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+        }
+    }
+
+
+    var injectImage = function () {
+        console.log("injectImage fired");
+        //var newImage = new Image();
+        var newImage = document.createElement("img");
+        console.log("injectImage");
+        console.log(newImage);
+        var target = document.getElementById("imgTarget");
+        console.log(target);
+        console.log(newImage);
+        newImage.src = "http://c1.nrostatic.com/sites/default/files/uploaded/donald-trump-incapable-of-embarrassment-r_0.jpg";
+        newImage.id = "theDonald";
+        target.innerHTML = "";
+        target.appendChild(newImage);
+
+    };
+
+    var injectImagePhone = function () {
+        console.log("injectImagePhone fired");
+        //var newImage = new Image();
+        var newImage = document.createElement("img");
+        console.log("injectImageSSN");
+        console.log(newImage);
+        var target = document.getElementById("imgTargetPhone");
+        console.log(target);
+        console.log(newImage);
+        newImage.src = "http://c1.nrostatic.com/sites/default/files/uploaded/donald-trump-incapable-of-embarrassment-r_0.jpg?foo=555-55-5555";
+        newImage.id = "imagePhone";
+        target.innerHTML = "";
+        target.appendChild(newImage);
+
+    };
+
+    var injectImageEncodedSSN = function () {
+        console.log("injectImageEncodedSSN fired");
+        //var newImage = new Image();
+        var newImage = document.createElement("img");
+        console.log("injectImageEncodedSSN");
+        console.log(newImage);
+        var target = document.getElementById("imgTargetEncodedSSN");
+        console.log(target);
+        console.log(newImage);
+        newImage.src = "http://c1.nrostatic.com/sites/default/files/uploaded/donald-trump-incapable-of-embarrassment-r_0.jpg?foo%3D222%2D22%2D2222";
+        newImage.id = "theDonaldEncodedSSN";
+        target.innerHTML = "";
+        target.appendChild(newImage);
+
+    };
+
+    var injectLogoPhone = function () {
+        console.log("injectImagePhone fired");
+        //var newImage = new Image();
+        var newImage = document.createElement("img");
+        console.log(newImage);
+        var target = document.getElementById("imgTargetLogoPhone");
+        console.log(target);
+        console.log(newImage);
+        newImage.src = "http://mobilemarketingmagazine.com/wp-content/uploads/2015/08/ensighten.png?foo=555-55-5555";
+        newImage.id = "logoPhone";
+        target.innerHTML = "";
+        target.appendChild(newImage);
+
+    };
+
+    var injectLogoSSN = function () {
+        console.log("injectImageEncodedSSN fired");
+        //var newImage = new Image();
+        var newImage = document.createElement("img");
+        console.log("logoEncodedSSN");
+        console.log(newImage);
+        var target = document.getElementById("imgLogoEncodedSSN");
+        console.log(target);
+        console.log(newImage);
+        newImage.src = "http://mobilemarketingmagazine.com/wp-content/uploads/2015/08/ensighten.png?foo%3D222%2D22%2D2222";
+        newImage.id = "logoEncodedSSN";
+        target.innerHTML = "";
+        target.appendChild(newImage);
+
+    };
+
+    var chgImgSrc = function(){
+        console.log("chgImgSrc");
+        var target = document.getElementById("trump");
+        target.src = "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png";
+    };
+
+
+    var chgSciptSrc = function(){
+        console.log("chgSciptSrc");
+        var target = document.getElementById("changeScriptSourceTag");
+        target.src = "http://ensightentest.nickstark.com/changeScriptSrcAfter.js";
+    };
+
+    var injectScript = function () {
+
+        var scriptTarget = document.getElementById('scriptTarget');
+        var x = document.createElement("SCRIPT");
+        x.setAttribute("src", "http://ensightentest.nickstark.com/jsTest2.js");
+        x.setAttribute("id", "scriptTag");
+        document.body.appendChild(x);
+
+        setTimeout(function () {
+            var target = document.getElementById("appendChildScriptMessage");
+            console.log("ensJSTest2");
+            console.log(typeof(ensJSTest2));
+
+            if (typeof(ensJSTest2) !== 'undefined') {
+                target.innerHTML = "JavaScript File Successfully Injected";
+            }
+            else{
+                target.innerHTML = "JavaScript File Injection Failed";
+            }
+
+        }, 1000);
+
+
+    };
+
+    var injectIframe = function () {
+
+        var iFrameTarget = document.getElementById('iFrameTarget');
+
+        var x = document.createElement("IFRAME");
+        x.setAttribute("id", "iframe2");
+        x.setAttribute("src", "http://ensightentest.nickstark.com/iframe2.html");
+        iFrameTarget.appendChild(x);
+
+    }
+
+    var changePrefs = function () {
+        console.log("changePrefs fired");
+        gateway.cookieModal.openModal();
+    }
+
+
+
+    getBrowser = function(){
+        var ua=navigator.userAgent,tem,M=ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+        if(/trident/i.test(M[1])){
+            tem=/\brv[ :]+(\d+)/g.exec(ua) || [];
+            return {name:'IE',version:(tem[1]||'')};
+        }
+        if(M[1]==='Chrome'){
+            tem=ua.match(/\bOPR\/(\d+)/)
+            if(tem!=null)   {return {name:'Opera', version:tem[1]};}
+        }
+        M=M[2]? [M[1], M[2]]: [navigator.appName, navigator.appVersion, '-?'];
+        if((tem=ua.match(/version\/(\d+)/i))!=null) {M.splice(1,1,tem[1]);}
+        return {
+            name: M[0],
+            version: M[1]
+        };
+    }
+
+    changePrefsButton.addEventListener("click", changePrefs);
+    injectImgButton.addEventListener("click", injectImage);
+    injectImgPhoneButton.addEventListener("click", injectImagePhone);
+    injectImgEncodedSSNButton.addEventListener("click", injectImageEncodedSSN);
+    injectLogoPhoneButton.addEventListener("click", injectLogoPhone);
+    injectLogoEncodedSSNButton.addEventListener("click", injectLogoSSN);
+    chgImgSrcButton.addEventListener("click", chgImgSrc);
+    chgScriptSrcButton.addEventListener("click", chgSciptSrc);
+    injectScriptButton.addEventListener("click", injectScript);
+    injectIFrameButton.addEventListener("click", injectIframe);
+
+
+    var createNewImage = function(){
+        var testImage = document.createElement("img");
+
+        testImage.src = "http://c1.nrostatic.com/sites/default/files/uploaded/donald-trump-incapable-of-embarrassment-r_0.jpg";
+        testImage.id = "theDonald";
+
+
+        return testImage;
+    };
+
+
+    var init = (function(){
+        testNativeJSLoad();
+
+    }());
+
+
+
+</script>
+
+
+<script type="text/javascript" src="scripts/whitelist/innerHTML.js"></script>
+
+<script type="text/javascript" src="scripts/whitelist/logging.js"></script>
+
+
+</body>
+</html>
