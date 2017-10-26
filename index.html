@@ -74,7 +74,6 @@
 </head>
 <body>
 
-<button id="clearAllCookies" onclick="deleteAllCookies()" class="fixed">Clear All Cookies</button>
 <table class="fixed testTitles">
     <tr>
         <th>Image Tests</th>
@@ -124,29 +123,6 @@
             <div id="iFrameTarget">Test Not Run</div>
         </td>
     </tr>
-    <tr class="testHeader">
-        <td colspan="3">Block Request Based On Regex Match</td>
-    </tr>
-    <tr>
-        <td>
-            <div>Inject Image With Phone in URL</div>
-            <button id="injectImagePhone">Inject</button>
-            <div id="imgTargetPhone">Test Not Run</div>
-        </td>
-        <td>
-            <div>Inject Image With Encoded SSN in URL</div>
-            <button id="injectImageEncodedSSN">Inject</button>
-            <div id="imgTargetEncodedSSN">Test Not Run</div>
-        </td>
-        <td>
-            <div>Inject Logo With Phone in URL</div>
-            <button id="injectLogoPhone">Inject</button>
-            <div id="imgTargetLogoPhone">Test Not Run</div>
-            <div>Inject Logo With Encoded SSN in URL</div>
-            <button id="injectLogoEncodedSSN">Inject</button>
-            <div id="imgLogoEncodedSSN">Test Not Run</div>
-        </td>
-    </tr>
 
     <tr class="testHeader">
         <td colspan="3">Test Changing The Src From Web Server To 3rd Party Source</td>
@@ -155,7 +131,7 @@
         <td>
             <button id="chgImgSrc">Change Image Src</button>
             <div>
-                <img id="trump" src="images/thisIsATest.jpg" width="409" height="409">
+                <img id="trump" src="https://www.ensighten.com/wp-content/uploads/2017/01/e-logo3.png" width="409" height="409">
             </div>
 
         </td>
@@ -172,33 +148,7 @@
 
         </td>
     </tr>
-    <tr class="testHeader">
-        <td colspan="3">Test innerHTML injection</td>
-    </tr>
-    <tr>
-        <td>
-            <button id="injectInnerHTMLImg">Inject Image</button>
-            <div id="innerHTMLImgTarget"></div>
-        </td>
-        <td>
-            <button id="injectInnerHTMLScript">Inject Script</button>
-            <div id="innerHTMLScriptMessage"></div>
-            <div id="innerHTMLScriptTarget"></div>
-        </td>
-        <td>
-            <button id="injectInnerHTMLiFrame">Inject IFrame</button>
-            <div id="innerHTMLiFrameTarget"></div>
-        </td>
-    </tr>
-    <tr class="testHeader">
-        <td colspan="3">Logging Test</td>
-    </tr>
-    <tr>
-        <td colspan="3">
-            <div id="loggingTarget"></div>
-        </td>
 
-    </tr>
 </table>
 
 
@@ -212,7 +162,6 @@
     var injectImgButton = document.getElementById('injectImage');
     var injectImgPhoneButton = document.getElementById('injectImagePhone');
     var injectImgEncodedSSNButton = document.getElementById('injectImageEncodedSSN');
-    var injectLogoPhoneButton = document.getElementById('injectLogoPhone');
     var injectLogoEncodedSSNButton = document.getElementById('injectLogoEncodedSSN');
     var injectScriptButton = document.getElementById('injectScript');
     var injectIFrameButton = document.getElementById('injectIFrame');
@@ -400,8 +349,6 @@
     }
 
     injectImgButton.addEventListener("click", injectImage);
-    injectImgPhoneButton.addEventListener("click", injectImagePhone);
-    injectImgEncodedSSNButton.addEventListener("click", injectImageEncodedSSN);
     injectLogoPhoneButton.addEventListener("click", injectLogoPhone);
     injectLogoEncodedSSNButton.addEventListener("click", injectLogoSSN);
     chgImgSrcButton.addEventListener("click", chgImgSrc);
@@ -431,10 +378,6 @@
 </script>
 
 
-<script type="text/javascript" src="scripts/whitelist/innerHTML.js"></script>
-
-<script type="text/javascript" src="scripts/whitelist/logging.js"></script>
-
-
+<
 </body>
 </html>
