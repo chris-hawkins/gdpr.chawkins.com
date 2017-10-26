@@ -74,6 +74,7 @@
 </head>
 <body>
 
+<button id="clearAllCookies" onclick="deleteAllCookies()" class="fixed">Clear All Cookies</button>
 <table class="fixed testTitles">
     <tr>
         <th>Image Tests</th>
@@ -208,7 +209,6 @@
 
     var isIE8OrLower = document.all && !document.addEventListener;
 
-    var changePrefsButton = document.getElementById('changePrefs');
     var injectImgButton = document.getElementById('injectImage');
     var injectImgPhoneButton = document.getElementById('injectImagePhone');
     var injectImgEncodedSSNButton = document.getElementById('injectImageEncodedSSN');
